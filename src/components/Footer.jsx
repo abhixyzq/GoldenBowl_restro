@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, MessageSquare, Clock, Heart, Code2 } from 'lucide-react';
+import { MapPin, Phone, MessageSquare, Clock, Heart } from 'lucide-react';
 
 export const Footer = () => {
   return (
@@ -103,21 +103,17 @@ export const Footer = () => {
 
       <div className="max-w-7xl mx-auto w-full h-[1px] bg-outline-variant/30 my-8" />
 
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-on-surface-variant">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-on-surface-variant">
         <p>© 2024–2026 Golden Bowl Hajipur. The Modern Hearth.</p>
-        
-        <div className="flex items-center gap-1.5 font-label font-medium bg-surface px-3.5 py-1.5 rounded-full border border-outline-variant/30 plate-shadow">
-          <Code2 className="w-3.5 h-3.5 text-primary" />
-          <span>Built by</span>
-          <a 
-            href="https://abhishek.nainix.me" 
-            target="_blank" 
-            rel="noreferrer"
-            className="font-bold text-primary hover:underline transition-colors"
-          >
-            Abhishek (abhishek.nainix.me)
-          </a>
-        </div>
+
+        <a 
+          href="https://abhishek.nainix.me" 
+          target="_blank" 
+          rel="noreferrer"
+          className="text-on-surface-variant hover:text-primary transition-colors font-medium hover:underline opacity-85"
+        >
+          Built by Abhishek
+        </a>
       </div>
     </footer>
   );
