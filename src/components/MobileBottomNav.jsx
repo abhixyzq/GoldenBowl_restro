@@ -15,34 +15,39 @@ export const MobileBottomNav = () => {
   ];
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md border-t border-outline-variant/30 px-2 py-1.5 flex justify-around items-center shadow-lg">
+    <nav 
+      aria-label="Mobile Navigation"
+      className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md border-t border-outline-variant/30 px-2 py-1.5 flex justify-around items-center shadow-lg"
+    >
       {navItems.map((item) => {
         const Icon = item.icon;
         return (
           <NavLink
             key={item.path}
             to={item.path}
+            aria-label={item.label}
             className={({ isActive }) =>
               `flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
                 isActive
                   ? 'bg-primary-container text-on-primary-container font-bold scale-105'
-                  : 'text-on-surface-variant hover:text-primary'
+                  : 'text-on-surface hover:text-primary font-semibold'
               }`
             }
           >
             <Icon className="w-5 h-5" />
-            <span className="text-[10px] font-label mt-0.5">{item.label}</span>
+            <span className="text-[11px] font-label font-bold mt-0.5">{item.label}</span>
           </NavLink>
         );
       })}
 
       <NavLink
         to="/cart"
+        aria-label={`View Cart with ${totalItemCount} items`}
         className={({ isActive }) =>
           `relative flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
             isActive
               ? 'bg-secondary text-white font-bold scale-105'
-              : 'text-secondary hover:text-secondary-container'
+              : 'text-secondary hover:text-secondary-container font-bold'
           }`
         }
       >
@@ -54,7 +59,7 @@ export const MobileBottomNav = () => {
             </span>
           )}
         </div>
-        <span className="text-[10px] font-label font-bold mt-0.5">Cart</span>
+        <span className="text-[11px] font-label font-bold mt-0.5">Cart</span>
       </NavLink>
     </nav>
   );

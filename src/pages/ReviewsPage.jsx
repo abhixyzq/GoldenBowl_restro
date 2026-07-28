@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Star, MessageSquare, Quote, CheckCircle2, ThumbsUp, Send } from 'lucide-react';
+import { Star, Quote, CheckCircle2, ThumbsUp, Send } from 'lucide-react';
 
 export const ReviewsPage = () => {
   const [reviewForm, setReviewForm] = useState({ name: '', rating: '5', comment: '' });
@@ -42,51 +42,51 @@ export const ReviewsPage = () => {
   };
 
   return (
-    <div className="pb-24 md:pb-32 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto space-y-10 animate-fade-in pt-6">
+    <div className="pb-24 md:pb-32 px-3 sm:px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto space-y-8 animate-fade-in pt-4 sm:pt-6">
       
       {/* Header Banner */}
-      <div className="bg-surface-container-low p-8 md:p-12 rounded-3xl border border-outline-variant/30 plate-shadow flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="bg-surface-container-low p-6 sm:p-12 rounded-3xl border border-outline-variant/30 plate-shadow flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-2">
           <span className="font-label text-xs font-bold text-secondary uppercase tracking-widest block">Customer Testimonials</span>
           <h1 className="font-headline text-3xl sm:text-5xl font-extrabold text-on-surface">
             What Hajipur Loves
           </h1>
-          <p className="font-body text-sm text-on-surface-variant max-w-md leading-relaxed">
+          <p className="font-body text-xs sm:text-sm text-on-surface font-medium max-w-md leading-relaxed">
             Read real customer reviews from dining guests and food delivery patrons across Hajipur, Bihar.
           </p>
         </div>
 
         <div className="bg-surface p-6 rounded-2xl border border-outline-variant/30 text-center space-y-1 plate-shadow min-w-[220px]">
           <span className="font-headline text-4xl font-extrabold text-primary block">4.7★</span>
-          <div className="flex justify-center text-amber-500 gap-1">
+          <div className="flex justify-center text-amber-600 gap-1">
             {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
           </div>
-          <span className="text-xs text-on-surface-variant font-medium block">Based on 376 Google Reviews</span>
+          <span className="text-xs text-on-surface font-bold block">Based on 376 Google Reviews</span>
         </div>
       </div>
 
       {/* Reviews Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {reviewsList.map((rev, idx) => (
-          <div key={idx} className="bg-surface p-8 rounded-3xl border border-outline-variant/30 plate-shadow space-y-4 relative">
+          <div key={idx} className="bg-surface p-6 sm:p-8 rounded-3xl border border-outline-variant/30 plate-shadow space-y-4 relative">
             <Quote className="w-10 h-10 text-primary/15 absolute top-6 right-6" />
             
             <div className="flex items-center gap-2">
-              <div className="flex text-amber-500 gap-0.5">
+              <div className="flex text-amber-600 gap-0.5">
                 {[...Array(rev.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
               </div>
-              <span className="text-xs text-on-surface-variant opacity-75">• {rev.date}</span>
+              <span className="text-xs text-on-surface font-medium opacity-85">• {rev.date}</span>
             </div>
 
-            <p className="font-body text-sm text-on-surface italic leading-relaxed">
+            <p className="font-body text-xs sm:text-sm text-on-surface italic font-medium leading-relaxed">
               "{rev.comment}"
             </p>
 
             <div className="flex items-center justify-between pt-2 border-t border-outline-variant/20">
               <span className="font-label text-xs font-bold text-secondary">{rev.name}</span>
               {rev.verified && (
-                <span className="text-[10px] text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded-full">
-                  <CheckCircle2 className="w-3 h-3" /> Verified Guest
+                <span className="text-xs text-emerald-800 font-bold flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded-full">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Verified Guest
                 </span>
               )}
             </div>
@@ -95,24 +95,25 @@ export const ReviewsPage = () => {
       </div>
 
       {/* Review Submission Form */}
-      <div className="bg-surface-container-low p-8 rounded-3xl border border-outline-variant/30 plate-shadow space-y-4">
+      <div className="bg-surface-container-low p-6 sm:p-8 rounded-3xl border border-outline-variant/30 plate-shadow space-y-4">
         <div className="space-y-1">
-          <h3 className="font-headline text-2xl font-bold text-on-surface">Share Your Experience</h3>
-          <p className="text-xs text-on-surface-variant">Visited Golden Bowl recently? We'd love to hear your feedback.</p>
+          <h2 className="font-headline text-xl sm:text-2xl font-bold text-on-surface">Share Your Experience</h2>
+          <p className="text-xs text-on-surface font-medium">Visited Golden Bowl recently? We'd love to hear your feedback.</p>
         </div>
 
         {submitted ? (
           <div className="py-6 text-center space-y-2 bg-surface p-6 rounded-2xl border border-emerald-300">
-            <ThumbsUp className="w-10 h-10 text-emerald-600 mx-auto" />
-            <h4 className="font-headline text-lg font-bold text-emerald-800">Thank You for Your Feedback!</h4>
-            <p className="text-xs text-on-surface-variant">Your review has been submitted to the Golden Bowl team.</p>
+            <ThumbsUp className="w-10 h-10 text-emerald-700 mx-auto" />
+            <h3 className="font-headline text-lg font-bold text-emerald-900">Thank You for Your Feedback!</h3>
+            <p className="text-xs text-on-surface font-medium">Your review has been submitted to the Golden Bowl team.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-on-surface-variant mb-1">Your Name</label>
+                <label htmlFor="reviewerName" className="block text-xs font-bold text-on-surface mb-1">Your Name</label>
                 <input
+                  id="reviewerName"
                   type="text"
                   required
                   placeholder="Rahul S."
@@ -123,8 +124,9 @@ export const ReviewsPage = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-on-surface-variant mb-1">Rating</label>
+                <label htmlFor="reviewerRating" className="block text-xs font-bold text-on-surface mb-1">Rating</label>
                 <select
+                  id="reviewerRating"
                   value={reviewForm.rating}
                   onChange={(e) => setReviewForm({ ...reviewForm, rating: e.target.value })}
                   className="w-full px-4 py-2.5 rounded-xl bg-surface border border-outline-variant/30 text-xs focus:outline-none focus:ring-2 focus:ring-primary"
@@ -137,8 +139,9 @@ export const ReviewsPage = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-on-surface-variant mb-1">Your Review</label>
+              <label htmlFor="reviewerComment" className="block text-xs font-bold text-on-surface mb-1">Your Review</label>
               <textarea
+                id="reviewerComment"
                 required
                 placeholder="Tell us about the food flavor, biryani aroma, atmosphere, or delivery speed..."
                 rows={3}
@@ -150,7 +153,8 @@ export const ReviewsPage = () => {
 
             <button
               type="submit"
-              className="bg-primary text-on-primary font-bold px-8 py-3 rounded-full text-xs flex items-center justify-center gap-2 hover:bg-opacity-90 active:scale-95 transition-all shadow-md"
+              className="bg-primary text-on-primary font-bold px-8 py-3 rounded-full text-xs flex items-center justify-center gap-2 hover:bg-opacity-90 active:scale-95 transition-all shadow-md focus:ring-2 focus:ring-primary"
+              aria-label="Submit your customer review"
             >
               <Send className="w-4 h-4" /> Submit Review
             </button>

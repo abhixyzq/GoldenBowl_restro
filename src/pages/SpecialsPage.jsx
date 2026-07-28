@@ -33,8 +33,8 @@ export const SpecialsPage = () => {
     <div className="pb-24 md:pb-32 px-3 sm:px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto space-y-6 sm:space-y-10 animate-fade-in pt-4 sm:pt-6">
       
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-primary to-amber-700 text-white p-6 sm:p-12 rounded-3xl plate-shadow relative overflow-hidden space-y-2 sm:space-y-3">
-        <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold font-label">
+      <div className="bg-gradient-to-r from-primary to-amber-800 text-white p-6 sm:p-12 rounded-3xl plate-shadow relative overflow-hidden space-y-2 sm:space-y-3">
+        <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold font-label">
           <Sparkles className="w-3.5 h-3.5" /> Chef's Daily Recommendations
         </div>
 
@@ -42,7 +42,7 @@ export const SpecialsPage = () => {
           Golden Bowl Specials
         </h1>
 
-        <p className="font-body text-xs sm:text-base opacity-90 max-w-xl leading-relaxed">
+        <p className="font-body text-xs sm:text-base opacity-95 max-w-xl leading-relaxed font-medium">
           Discover our most celebrated signature recipes, chef combo meals, and time-honored Dum Biryani dishes.
         </p>
       </div>
@@ -63,24 +63,29 @@ export const SpecialsPage = () => {
               <img 
                 src={combo.image} 
                 alt={combo.name} 
+                width="300"
+                height="200"
+                loading="lazy"
+                decoding="async"
                 className="w-full sm:w-44 h-36 sm:h-44 rounded-xl sm:rounded-2xl object-cover"
               />
               <div className="space-y-2 sm:space-y-3 flex-1 w-full">
-                <span className="bg-secondary text-white text-[9px] sm:text-[10px] font-label font-bold px-2.5 py-0.5 sm:py-1 rounded-full">
+                <span className="bg-secondary text-white text-xs font-label font-bold px-2.5 py-0.5 sm:py-1 rounded-full">
                   {combo.badge}
                 </span>
                 <h3 className="font-headline text-base sm:text-xl font-bold text-on-surface">{combo.name}</h3>
-                <p className="font-body text-xs text-on-surface-variant leading-relaxed">
+                <p className="font-body text-xs text-on-surface font-medium leading-relaxed">
                   {combo.items}
                 </p>
                 <div className="flex items-center justify-between pt-1">
                   <div className="flex items-baseline gap-1.5 sm:gap-2">
                     <span className="font-headline text-lg sm:text-2xl font-extrabold text-primary">₹{combo.price}</span>
-                    <span className="text-[11px] sm:text-xs text-on-surface-variant line-through">₹{combo.originalPrice}</span>
+                    <span className="text-xs text-on-surface line-through font-semibold">₹{combo.originalPrice}</span>
                   </div>
                   <button
                     onClick={() => addToCart({ ...combo, isVeg: combo.badge.includes('Veg') })}
-                    className="px-3.5 sm:px-4 py-1.5 sm:py-2 bg-primary text-on-primary font-label text-xs font-bold rounded-full hover:bg-opacity-90 active:scale-95 transition-all shadow-sm flex items-center gap-1"
+                    className="px-3.5 sm:px-4 py-1.5 sm:py-2 bg-primary text-on-primary font-label text-xs font-bold rounded-full hover:bg-opacity-90 active:scale-95 transition-all shadow-sm flex items-center gap-1 focus:ring-2 focus:ring-primary"
+                    aria-label={`Order combo ${combo.name}`}
                   >
                     <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Order Combo
                   </button>
@@ -98,7 +103,7 @@ export const SpecialsPage = () => {
             <Flame className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" />
             <h2 className="font-headline text-xl sm:text-2xl font-bold text-on-surface">Highest Rated Dishes</h2>
           </div>
-          <Link to="/menu" className="text-xs font-bold text-primary hover:underline">
+          <Link to="/menu" className="text-xs font-bold text-primary hover:underline" aria-label="View all dishes">
             All Dishes →
           </Link>
         </div>
@@ -111,8 +116,16 @@ export const SpecialsPage = () => {
             >
               <div>
                 <div className="relative h-32 sm:h-48 rounded-xl sm:rounded-2xl overflow-hidden mb-2 sm:mb-3">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                  <div className="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 bg-primary text-white text-[8px] sm:text-[10px] font-bold px-1.5 sm:px-2.5 py-0.5 rounded-full shadow">
+                  <img 
+                    src={item.image} 
+                    alt={item.name} 
+                    width="300"
+                    height="200"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover" 
+                  />
+                  <div className="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">
                     Top Rated
                   </div>
                 </div>
@@ -122,12 +135,12 @@ export const SpecialsPage = () => {
                     <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full flex-shrink-0 ${item.isVeg ? 'bg-emerald-600' : 'bg-red-600'}`} />
                     <h3 className="font-headline text-xs sm:text-base font-bold text-on-surface truncate">{item.name}</h3>
                   </div>
-                  <div className="flex items-center gap-0.5 text-[10px] sm:text-xs font-bold text-amber-600 flex-shrink-0">
+                  <div className="flex items-center gap-0.5 text-xs font-bold text-amber-700 flex-shrink-0">
                     <Star className="w-3 h-3 fill-current" /> {item.rating}
                   </div>
                 </div>
 
-                <p className="font-body text-[10px] sm:text-xs text-on-surface-variant line-clamp-2 mt-1 sm:mt-2 leading-tight sm:leading-relaxed">
+                <p className="font-body text-xs text-on-surface font-medium line-clamp-2 mt-1 sm:mt-2 leading-tight sm:leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -137,7 +150,8 @@ export const SpecialsPage = () => {
                 <div className="flex gap-1 sm:gap-2">
                   <button
                     onClick={() => addToCart(item)}
-                    className="px-2.5 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-bold bg-primary text-on-primary rounded-full hover:bg-opacity-90 active:scale-95"
+                    className="px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs font-bold bg-primary text-on-primary rounded-full hover:bg-opacity-90 active:scale-95 focus:ring-2 focus:ring-primary"
+                    aria-label={`Add ${item.name} to cart`}
                   >
                     + Add
                   </button>

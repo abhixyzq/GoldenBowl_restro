@@ -43,7 +43,8 @@ export const CartPage = () => {
       <div className="flex items-center justify-between border-b border-outline-variant/30 pb-4">
         <button 
           onClick={() => navigate(-1)} 
-          className="inline-flex items-center gap-2 text-xs font-bold text-on-surface-variant hover:text-primary transition-colors bg-surface-container px-3.5 py-1.5 rounded-full border border-outline-variant/30"
+          className="inline-flex items-center gap-2 text-xs font-bold text-on-surface hover:text-primary transition-colors bg-surface-container px-3.5 py-1.5 rounded-full border border-outline-variant/30 focus:ring-2 focus:ring-primary"
+          aria-label="Return to previous page"
         >
           <ArrowLeft className="w-4 h-4" /> Continue Shopping
         </button>
@@ -56,11 +57,11 @@ export const CartPage = () => {
 
       {orderPlaced ? (
         <div className="bg-surface-container-low p-8 sm:p-12 rounded-3xl text-center space-y-4 plate-shadow border border-outline-variant/30 max-w-lg mx-auto">
-          <div className="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
+          <div className="w-16 h-16 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto">
             <CheckCircle2 className="w-10 h-10" />
           </div>
-          <h2 className="font-headline text-2xl font-bold text-emerald-800">Order Sent via WhatsApp!</h2>
-          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+          <h2 className="font-headline text-2xl font-bold text-emerald-900">Order Sent via WhatsApp!</h2>
+          <p className="text-xs sm:text-sm text-on-surface font-medium leading-relaxed">
             We have forwarded your order summary to the Golden Bowl Hajipur desk. You can also call us directly at <strong>+91 70333 13440</strong>.
           </p>
           <div className="pt-2">
@@ -78,17 +79,18 @@ export const CartPage = () => {
         </div>
       ) : cart.length === 0 ? (
         <div className="bg-surface-container-low p-12 sm:p-16 rounded-3xl text-center space-y-4 plate-shadow border border-outline-variant/30 max-w-md mx-auto">
-          <div className="w-16 h-16 bg-surface-container text-on-surface-variant rounded-full flex items-center justify-center mx-auto opacity-60">
+          <div className="w-16 h-16 bg-surface-container text-on-surface rounded-full flex items-center justify-center mx-auto opacity-70">
             <ShoppingBag className="w-8 h-8" />
           </div>
           <h2 className="font-headline text-xl font-bold text-on-surface">Your Basket is Empty</h2>
-          <p className="text-xs text-on-surface-variant leading-relaxed">
+          <p className="text-xs text-on-surface font-medium leading-relaxed">
             Explore our authentic North Indian, Biryani, and Chinese menu dishes to add your favorite meals.
           </p>
           <div className="pt-2">
             <Link
               to="/menu"
               className="inline-flex items-center gap-2 bg-primary text-on-primary font-bold px-6 py-3 rounded-full text-xs shadow-md hover:bg-opacity-90"
+              aria-label="Explore menu dishes"
             >
               <Utensils className="w-4 h-4" /> Explore Menu Dishes
             </Link>
@@ -107,7 +109,8 @@ export const CartPage = () => {
               </span>
               <button
                 onClick={clearCart}
-                className="text-xs text-red-600 font-bold hover:underline flex items-center gap-1"
+                className="text-xs text-red-700 font-bold hover:underline flex items-center gap-1 focus:ring-2 focus:ring-red-500"
+                aria-label="Clear all items from basket"
               >
                 <Trash2 className="w-3.5 h-3.5" /> Clear All
               </button>
@@ -122,7 +125,11 @@ export const CartPage = () => {
                 >
                   <img 
                     src={item.image} 
-                    alt={item.name} 
+                    alt={item.name}
+                    width="80"
+                    height="80"
+                    loading="lazy"
+                    decoding="async"
                     className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover flex-shrink-0"
                   />
 
@@ -138,14 +145,16 @@ export const CartPage = () => {
                   <div className="flex items-center gap-1.5 sm:gap-2 bg-surface-container-low px-2 sm:px-3 py-1 rounded-full border border-outline-variant/30">
                     <button
                       onClick={() => updateQuantity(item.id, -1)}
-                      className="p-1 text-on-surface-variant hover:text-primary transition-colors"
+                      className="p-1 text-on-surface hover:text-primary transition-colors focus:ring-1 focus:ring-primary"
+                      aria-label={`Decrease quantity of ${item.name}`}
                     >
                       <Minus className="w-3.5 h-3.5" />
                     </button>
                     <span className="font-bold text-xs sm:text-sm text-on-surface w-4 text-center">{item.quantity}</span>
                     <button
                       onClick={() => updateQuantity(item.id, 1)}
-                      className="p-1 text-on-surface-variant hover:text-primary transition-colors"
+                      className="p-1 text-on-surface hover:text-primary transition-colors focus:ring-1 focus:ring-primary"
+                      aria-label={`Increase quantity of ${item.name}`}
                     >
                       <Plus className="w-3.5 h-3.5" />
                     </button>
@@ -153,7 +162,8 @@ export const CartPage = () => {
 
                   <button
                     onClick={() => removeFromCart(item.id)}
-                    className="p-2 text-red-500 hover:bg-red-50 rounded-full transition-colors"
+                    className="p-2 text-red-600 hover:bg-red-50 rounded-full transition-colors focus:ring-1 focus:ring-red-500"
+                    aria-label={`Remove ${item.name} from cart`}
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -168,16 +178,17 @@ export const CartPage = () => {
             
             {/* Order Type Toggle */}
             <div className="bg-surface-container-low p-4 rounded-3xl border border-outline-variant/30 space-y-4 plate-shadow">
-              <span className="font-label text-xs font-bold text-secondary uppercase tracking-wider block">Order Mode</span>
+              <h2 className="font-label text-xs font-bold text-secondary uppercase tracking-wider block">Order Mode</h2>
               
-              <div className="flex bg-surface p-1 rounded-2xl border border-outline-variant/30">
+              <div className="flex bg-surface p-1 rounded-2xl border border-outline-variant/30" role="group" aria-label="Order mode selector">
                 <button
                   onClick={() => setOrderType('delivery')}
                   className={`flex-1 py-2.5 rounded-xl font-label text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                     orderType === 'delivery'
                       ? 'bg-primary text-on-primary shadow-sm'
-                      : 'text-on-surface-variant hover:text-on-surface'
+                      : 'text-on-surface hover:text-on-surface'
                   }`}
+                  aria-label="Select Home Delivery"
                 >
                   <Truck className="w-4 h-4" /> Home Delivery
                 </button>
@@ -186,8 +197,9 @@ export const CartPage = () => {
                   className={`flex-1 py-2.5 rounded-xl font-label text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                     orderType === 'pickup'
                       ? 'bg-primary text-on-primary shadow-sm'
-                      : 'text-on-surface-variant hover:text-on-surface'
+                      : 'text-on-surface hover:text-on-surface'
                   }`}
+                  aria-label="Select Takeaway or Dine-in"
                 >
                   <Store className="w-4 h-4" /> Takeaway / Dine-in
                 </button>
@@ -196,8 +208,9 @@ export const CartPage = () => {
               {/* Form Inputs */}
               <div className="space-y-3 pt-1">
                 <div>
-                  <label className="block text-[11px] font-bold text-on-surface-variant mb-1">Your Full Name</label>
+                  <label htmlFor="customerName" className="block text-xs font-bold text-on-surface mb-1">Your Full Name</label>
                   <input
+                    id="customerName"
                     type="text"
                     placeholder="Rahul Sharma"
                     value={customerName}
@@ -207,8 +220,9 @@ export const CartPage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-on-surface-variant mb-1">Phone Number</label>
+                  <label htmlFor="customerPhone" className="block text-xs font-bold text-on-surface mb-1">Phone Number</label>
                   <input
+                    id="customerPhone"
                     type="tel"
                     placeholder="Mobile Number (e.g. 70333 13440)"
                     value={customerPhone}
@@ -219,8 +233,9 @@ export const CartPage = () => {
 
                 {orderType === 'delivery' && (
                   <div>
-                    <label className="block text-[11px] font-bold text-on-surface-variant mb-1">Delivery Address in Hajipur</label>
+                    <label htmlFor="address" className="block text-xs font-bold text-on-surface mb-1">Delivery Address in Hajipur</label>
                     <textarea
+                      id="address"
                       placeholder="House No., Street, Landmark, Hajipur..."
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
@@ -231,8 +246,9 @@ export const CartPage = () => {
                 )}
 
                 <div>
-                  <label className="block text-[11px] font-bold text-on-surface-variant mb-1">Cooking Notes / Spice Instructions (Optional)</label>
+                  <label htmlFor="cookingNotes" className="block text-xs font-bold text-on-surface mb-1">Cooking Notes / Spice Instructions (Optional)</label>
                   <input
+                    id="cookingNotes"
                     type="text"
                     placeholder="Extra spicy, less oil, high chair needed..."
                     value={notes}
@@ -244,13 +260,13 @@ export const CartPage = () => {
 
               {/* Price Breakdown */}
               <div className="border-t border-outline-variant/30 pt-3 space-y-2 text-xs">
-                <div className="flex justify-between text-on-surface-variant">
+                <div className="flex justify-between text-on-surface font-medium">
                   <span>Subtotal</span>
                   <span className="font-bold text-on-surface">₹{totalPrice}</span>
                 </div>
-                <div className="flex justify-between text-on-surface-variant">
+                <div className="flex justify-between text-on-surface font-medium">
                   <span>Delivery Charges</span>
-                  <span className="text-emerald-700 font-bold">Calculated on WhatsApp</span>
+                  <span className="text-emerald-800 font-bold">Calculated on WhatsApp</span>
                 </div>
                 <div className="h-[1px] bg-outline-variant/30 my-1" />
                 <div className="flex justify-between text-base font-headline font-bold">
@@ -263,13 +279,15 @@ export const CartPage = () => {
               <div className="flex flex-col gap-2 pt-2">
                 <button
                   onClick={handleCheckoutWhatsApp}
-                  className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-label text-xs font-bold rounded-full flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+                  className="w-full py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-label text-xs font-bold rounded-full flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all focus:ring-2 focus:ring-emerald-500"
+                  aria-label="Checkout order via WhatsApp"
                 >
                   <MessageSquare className="w-4 h-4" /> Order via WhatsApp
                 </button>
                 <a
                   href="tel:917033313440"
-                  className="w-full py-3 bg-secondary text-white font-label text-xs font-bold rounded-full flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+                  className="w-full py-3 bg-secondary text-white font-label text-xs font-bold rounded-full flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all focus:ring-2 focus:ring-secondary"
+                  aria-label="Call Golden Bowl Outlet Desk at +91 70333 13440"
                 >
                   <PhoneCall className="w-4 h-4" /> Call Outlet Desk (70333 13440)
                 </a>
